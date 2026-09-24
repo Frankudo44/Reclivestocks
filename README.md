@@ -42,7 +42,6 @@ supplies — all sourced with integrity and delivered cold & fresh.
 ## Project Structure
 
 ```
-REC-Livestock/
 ├── index.html                 # Homepage
 ├── shop.html                  # Shop / marketplace listing
 ├── product.html               # Product detail
@@ -69,6 +68,9 @@ REC-Livestock/
 ├── supabase/
 │   ├── schema.sql             # Full schema + RLS + triggers + storage
 │   └── seed.sql               # Sample categories, products, settings, zones…
+├── api/                       # Vercel serverless functions
+│   ├── verify-payment.js      # Paystack webhook verification
+│   └── sitemap.js             # Dynamic sitemap.xml
 └── vercel.json / robots.txt / sitemap.xml / .env.example / .gitignore
 ```
 
@@ -77,7 +79,6 @@ REC-Livestock/
 ## Quick Start
 
 ```bash
-cd REC-Livestock
 # serve statically (any static server is fine):
 python -m http.server 8080
 # or
