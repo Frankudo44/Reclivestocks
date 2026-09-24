@@ -79,6 +79,7 @@
           .map(
             (s) =>
               '<option value="' + s.id + '"' +
+              ' data-fee="' + (Number(s.pickup_fee) || 0) + '"' +
               ' data-name="' + UI.esc(s.name.replace(/"/g, "&quot;")) + '"' +
               ' data-addr="' + UI.esc(s.address.replace(/"/g, "&quot;")) + '"' +
               ' data-hours="' + UI.esc((s.operating_hours || "").replace(/"/g, "&quot;")) + '"' +
@@ -93,6 +94,13 @@
     }
   }
 
+  function selectedPickupFee() {
+    const sel = $('#pickup_station');
+    if (!sel || !sel.value) return 0;
+    const opt = sel.options[sel.selectedIndex];
+    return Number(opt && opt.getAttribute('data-fee')) || 0;
+  }
+
   function showPickupDetails() {
     const sel = $('#pickup_station');
     const info = $('#pickup_info');
@@ -103,7 +111,10 @@
       info.hidden = true;
       return;
     }
+    const fee = Number(opt.getAttribute('data-fee')) || 0;
     const lines = [opt.getAttribute('data-addr')];
+    if (fee > 0) lines.push('Pickup fee: ' + UI.money(fee));
+    else lines.push('Pickup fee: Free');
     if (opt.getAttribute('data-hours')) lines.push('Hours: ' + opt.getAttribute('data-hours'));
     if (opt.getAttribute('data-phone')) lines.push('Tel: ' + opt.getAttribute('data-phone'));
     text.textContent = lines.filter(Boolean).join(' · ');
@@ -131,7 +142,7 @@
     const note = $('#sum_note');
     if (note) {
       note.textContent = isPickup
-        ? 'Pickup at one of our stations is free. Bring your order reference when you come.'
+        ? 'Pickup fee varies by station — select one and your total updates automatically.'
         : 'Delivery fee is confirmed based on your selected state. We deliver across all 36 states and the FCT.';
     }
     updateTotals();
@@ -147,7 +158,12 @@
       })
     );
     const sel = $('#pickup_station');
-    if (sel) sel.addEventListener('change', showPickupDetails);
+    if (sel) {
+      sel.addEventListener('change', () => {
+        showPickupDetails();
+        updateTotals();
+      });
+    }
   }
 
   async function stateFee(state) {
@@ -176,9 +192,15 @@
     if (_fee !== undefined) currentFee = _fee;
     const subtotal = REC.cart.subtotal();
     const isPickup = REC.checkoutMethod === 'pickup';
-    const fee = isPickup ? 0 : (Number(currentFee) || 0);
+    const fee = isPickup ? selectedPickupFee() : (Number(currentFee) || 0);
+    const psSel = $('#pickup_station');
+    const stationChosen = isPickup && psSel && !!psSel.value;
+    const label = $('#sum_fee_label');
+    if (label) label.textContent = isPickup ? 'Pickup fee' : 'Delivery fee';
     $('#sum_subtotal').textContent = UI.money(subtotal);
-    $('#sum_delivery').textContent = isPickup ? "Free" : (fee ? UI.money(fee) : "—");
+    $('#sum_delivery').textContent = fee
+      ? UI.money(fee)
+      : (isPickup && stationChosen ? 'Free' : '—');
     $('#sum_total').textContent = UI.money(subtotal + fee);
   }
 
@@ -268,7 +290,7 @@
       try {
         const isPickup = REC.checkoutMethod === 'pickup';
         const state = $('#state').value;
-        const fee = isPickup ? 0 : await stateFee(state);
+        const fee = isPickup ? selectedPickupFee() : await stateFee(state);
         const subtotal = REC.cart.subtotal();
         const psSelect = $('#pickup_station');
         const psOption = psSelect && psSelect.value ? psSelect.options[psSelect.selectedIndex] : null;

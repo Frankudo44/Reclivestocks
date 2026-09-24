@@ -51,7 +51,7 @@ supplies — all sourced with integrity and delivered cold & fresh.
 ├── about.html / contact.html  # Farm story + contact/map+WhatsApp
 ├── blog.html / blog-post.html # Learning hub
 ├── privacy.html / terms.html / 404.html
-├── admin/                     # Admin area (requires admin role)
+├── rule/                      # Admin area (requires admin role)
 │   ├── login.html / index.html
 │   ├── products.html / orders.html / inventory.html
 │   ├── categories.html / delivery.html / testimonials.html
@@ -129,7 +129,7 @@ where email = 'you@example.com';
 > The admin email must exactly match the authenticated user's email.
 > `handle_new_user()` auto-creates the profile row when the account signs in.
 
-3. Sign in at `https://<your-site>/admin/login.html` — done.
+3. Sign in at `https://<your-site>/rule/login.html` — done.
 
 ### Storage (product/blog images)
 

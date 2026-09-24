@@ -5,7 +5,7 @@
   "use strict";
   const REC = (win.REC = win.REC || {});
 
-  const inAdmin = (window.location.pathname || "").includes("/admin/");
+  const inAdmin = (window.location.pathname || "").includes("/rule/");
   const SPRITE = inAdmin ? "../assets/icons/sprite.svg" : "assets/icons/sprite.svg";
 
   const UI = {

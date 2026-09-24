@@ -33,7 +33,7 @@
         $("pickup_name").textContent = order.pickup_station_name;
         $("pickup_address").textContent = order.pickup_station_address || "";
         $("pickup_hours").textContent =
-          "Pickup is free — bring your order reference (" + reference + ").";
+          "Bring your order reference (" + reference + ") when you come.";
         box.hidden = false;
       }
     }
