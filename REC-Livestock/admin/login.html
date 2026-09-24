@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login | REC Livestock &amp; Agro Farms</title>
+  <meta name="robots" content="noindex"/>
+  <link rel="icon" href="../assets/logo/rec-logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/variables.css"/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
+</head>
+<body class="admin-body">
+
+  <div class="admin-login-wrap">
+    <div class="admin-login-card" id="admin-login-card">
+      <div class="brand" style="justify-content:center">
+        <img src="../assets/logo/rec-logo.jpg" alt="REC logo"/>
+      </div>
+      <h1>Admin Sign In</h1>
+      <p class="sub">Restricted area. Authorized administrators only.</p>
+
+      <form id="admin_login_form">
+        <div class="field">
+          <label for="al_email">Email</label>
+          <input class="input" type="email" id="al_email" autocomplete="email" required placeholder="admin@reclivestock.ng"/>
+        </div>
+        <div class="field">
+          <label for="al_password">Password</label>
+          <div class="pw-field">
+            <input class="input" type="password" id="al_password" autocomplete="current-password" required placeholder="••••••••"/>
+            <button type="button" class="pw-toggle" data-target="al_password" aria-label="Show password" aria-pressed="false">
+              <svg aria-hidden="true"><use href="../assets/icons/sprite.svg#i-eye"></use></svg>
+            </button>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" id="al_submit">Sign In to Dashboard</button>
+        <div class="admin-login-note" id="al_setup_note" style="display:none">
+          Supabase is not configured yet. Add keys in <b>js/config.js</b>, run the SQL, then create your admin user in Supabase Studio.
+        </div>
+      </form>
+
+      <div style="margin-top:1.2rem;text-align:center">
+        <a href="../index.html" style="font-size:.85rem;font-weight:700;color:var(--rec-green)">← Back to website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/whatsapp.js"></script>
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/render.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/orders.js"></script>
+  <script src="../js/admin-shell.js"></script>
+  <script src="../js/admin-login.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Product placeholder">
+  <rect width="400" height="300" rx="16" fill="#eef3ec"/>
+  <g fill="none" stroke="#b9cdbf" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M200 90l50 25v50l-50 25-50-25v-50z"/>
+    <path d="M150 140l50 25 50-25"/>
+    <path d="M200 165v50"/>
+  </g>
+  <text x="200" y="248" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="14" font-weight="700" fill="#8aa596">Photo coming soon</text>
+</svg>

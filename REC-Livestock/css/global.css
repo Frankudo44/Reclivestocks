@@ -1,0 +1,220 @@
+/* ============================================================
+   REC — Global base + typography + utilities
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  line-height: 1.15;
+  color: var(--rec-green-dark);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+}
+h2 {
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+}
+h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+}
+h4 {
+  font-size: 1.1rem;
+}
+
+p {
+  color: var(--ink-2);
+}
+
+strong {
+  color: var(--rec-green-dark);
+}
+
+/* Utility */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rec-green);
+  margin-bottom: 0.9rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--gold);
+}
+
+.section {
+  padding-block: clamp(3.2rem, 7vw, 5.5rem);
+}
+.section-alt {
+  background: var(--white);
+}
+.section-dark {
+  background: var(--rec-green-forest);
+  color: #dbe9dc;
+}
+.section-dark h2,
+.section-dark h3 {
+  color: #fff;
+}
+.section-dark p {
+  color: #c3d6c6;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
+}
+.section-head.center .eyebrow {
+  justify-content: center;
+}
+.section-head.center .eyebrow::before {
+  display: none;
+}
+.section-head.center .eyebrow::after {
+  content: "";
+  width: 26px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--gold);
+}
+.section-head p {
+  margin-top: 0.8rem;
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+.text-center {
+  text-align: center;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(47, 158, 79, 0.55);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--rec-green);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #b9cdbb;
+  border-radius: 8px;
+  border: 3px solid var(--cream);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rec-green);
+}
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}

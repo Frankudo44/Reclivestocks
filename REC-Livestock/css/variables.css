@@ -1,0 +1,65 @@
+/* ============================================================
+   REC LIVESTOCK & AGRO FARMS — Design Tokens
+   ============================================================ */
+:root {
+  /* Brand greens */
+  --rec-green: #1f7a3d;
+  --rec-green-deep: #14532d;
+  --rec-green-dark: #0d331c;
+  --rec-green-forest: #0a2b17;
+  --rec-green-soft: #2f9e4f;
+  --rec-green-mint: #dff0e2;
+  --rec-green-tint: #eef6ee;
+
+  /* Earth / accent */
+  --earth: #6b4a26;
+  --earth-soft: #a8743c;
+  --gold: #e8b84b;
+  --gold-soft: #f4dfae;
+  --gold-dark: #c9972e;
+
+  /* Neutrals */
+  --cream: #f7f4ec;
+  --cream-2: #efe9db;
+  --white: #ffffff;
+  --ink: #12221a;
+  --ink-2: #3c4a42;
+  --muted: #68776e;
+  --line: #e3e8e2;
+  --line-dark: #d4ddd2;
+
+  /* Semantic */
+  --success: #2e7d32;
+  --warning: #b26a00;
+  --danger: #c0392b;
+  --info: #1769aa;
+
+  /* Typography */
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", "Segoe UI", Arial, sans-serif;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(13, 51, 28, 0.06);
+  --shadow-sm: 0 2px 8px rgba(13, 51, 28, 0.08);
+  --shadow-md: 0 8px 24px rgba(13, 51, 28, 0.1);
+  --shadow-lg: 0 18px 48px rgba(13, 51, 28, 0.16);
+  --shadow-gold: 0 10px 26px rgba(201, 151, 46, 0.32);
+
+  /* Layout */
+  --container: 1240px;
+  --header-h: 84px;
+  --gutter: clamp(1.1rem, 4vw, 2rem);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 0.16s;
+  --t: 0.28s;
+  --t-slow: 0.45s;
+}

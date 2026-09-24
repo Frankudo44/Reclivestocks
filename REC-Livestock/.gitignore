@@ -1,0 +1,26 @@
+# Environment / secrets
+.env
+.env.local
+.env.production
+
+# Dependencies — none needed for static hosting, but keep these out anyway
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+.vite/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+*.log
+
+# Misc
+.sass-cache/
+.tmp/

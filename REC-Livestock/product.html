@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product | REC Livestock &amp; Agro Farms</title>
+  <meta name="description" content="View product details, pricing, stock and delivery information for farm products from REC Livestock & Agro Farms Enterprises."/>
+  <link rel="canonical" href="https://reclivestock.ng/product.html"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product"/>
+  <meta property="og:site_name" content="REC Livestock & Agro Farms"/>
+  <meta property="og:title" content="REC Livestock & Agro Farms"/>
+  <meta property="og:description" content="View product details, pricing, stock and delivery information."/>
+  <meta property="og:url" content="https://reclivestock.ng/product.html"/>
+  <meta property="og:image" content="https://reclivestock.ng/assets/images/placeholder-product.svg"/>
+  <meta property="og:locale" content="en_NG"/>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="REC Livestock & Agro Farms"/>
+  <meta name="twitter:description" content="View product details, pricing, stock and delivery information."/>
+  <meta name="twitter:image" content="https://reclivestock.ng/assets/images/placeholder-product.svg"/>
+  <link rel="icon" href="assets/logo/rec-logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
+      <div class="container">
+        <!-- Missing state (hidden until needed) -->
+        <div id="pd_missing" style="display:none;justify-content:center;text-align:center;padding:4rem 0">
+          <div class="empty-state">
+            <div class="e-icon"><svg style="width:34px;height:34px"><use href="assets/icons/sprite.svg#i-alert"></use></svg></div>
+            <h4>Product not found</h4>
+            <p>This product may have been removed or the link may be incorrect.</p>
+            <a class="btn btn-primary" style="margin-top:1rem" href="shop.html">Back to Shop</a>
+          </div>
+        </div>
+
+        <div class="pd-layout" id="pd_layout">
+          <div class="pd-gallery">
+            <div class="pd-main-img">
+              <img id="pd_main_img" src="assets/images/placeholder-product.svg" alt="Product"/>
+            </div>
+            <div class="pd-thumbs" id="pd_thumbs"></div>
+          </div>
+
+          <div class="pd-info">
+            <span class="p-cat" id="pd_cat">Farm Product</span>
+            <h1 id="pd_name">Loading…</h1>
+
+            <div class="pd-price-row">
+              <span class="pd-price" id="pd_price">—</span>
+              <small id="pd_unit"></small>
+              <span class="badge badge-green" id="pd_stock">—</span>
+            </div>
+
+            <div class="pd-meta-grid" id="pd_attributes">
+              <div class="pd-meta">
+                <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-box"></use></svg>
+                <div><strong>Minimum order</strong><span id="pd_meta_min">—</span></div>
+              </div>
+              <div class="pd-meta">
+                <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-truck"></use></svg>
+                <div><strong>Delivery</strong><span id="pd_meta_delivery">—</span></div>
+              </div>
+            </div>
+
+            <p class="pd-description" id="pd_desc"></p>
+
+            <!-- Online orderable panel -->
+            <div class="pd-order-panel" id="pd_order_on">
+              <div class="qty-row" id="pd_qty_wrap">
+                <label for="pd_qty">Quantity</label>
+                <div class="qty-stepper">
+                  <button type="button" id="pd_qty_dec" aria-label="Decrease">&minus;</button>
+                  <input id="pd_qty" type="number" min="1" value="1" aria-label="Quantity"/>
+                  <button type="button" id="pd_qty_inc" aria-label="Increase">+</button>
+                </div>
+              </div>
+              <div class="pd-ctas">
+                <button type="button" class="btn btn-primary" id="pd_add_cart">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-cart"></use></svg>
+                  Add to Cart
+                </button>
+                <button type="button" class="btn btn-gold" id="pd_buy_now">Order Now</button>
+                <a class="btn btn-whatsapp" id="pd_wa_enquiry" href="#" target="_blank" rel="noopener">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+                  Ask About This Product
+                </a>
+              </div>
+            </div>
+
+            <!-- Visit farm panel -->
+            <div class="pd-order-panel" id="pd_order_off" style="display:none">
+              <div class="pd-visit-note">
+                <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-map-pin"></use></svg>
+                <div>
+                  <strong>Visit Farm to Purchase</strong>
+                  <p style="font-size:.86rem;color:#7a521f;margin-top:.2rem">This product is currently sold directly at the farm location. Contact us to confirm availability or arrange a visit.</p>
+                </div>
+              </div>
+              <div class="pd-ctas" style="margin-top:1rem">
+                <a class="btn btn-whatsapp" href="#" data-wa-general target="_blank" rel="noopener">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+                  Contact Us
+                </a>
+                <a class="btn btn-outline" href="contact.html">Find Our Farm</a>
+              </div>
+            </div>
+
+            <div class="pd-share">
+              <span>Share:</span>
+              <a href="#" id="pd_wa_share">WhatsApp</a>
+              <a href="shop.html">Back to Shop</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer reviews (ratings & comments) -->
+        <section class="reviews-section" id="pd_reviews" aria-labelledby="reviews-heading">
+          <div class="rv-head">
+            <div>
+              <span class="eyebrow">What our customers say</span>
+              <h2 id="reviews-heading" class="rv-title">Customer Reviews</h2>
+            </div>
+            <div class="rv-summary" id="rv_summary"></div>
+          </div>
+
+          <div class="rv-grid">
+            <div class="rv-list" id="rv_list"></div>
+            <div class="rv-form-panel" id="rv_form_panel"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Related -->
+    <section class="section section-alt" aria-labelledby="related-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">You may also like</span>
+          <h2 id="related-heading">Related Products</h2>
+        </div>
+        <div id="related_products" class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"></div>
+
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat with REC on WhatsApp">
+    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/reviews.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

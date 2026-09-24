@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | REC Livestock &amp; Agro Farms</title>
+  <meta name="description" content="Complete your order for farm products from REC Livestock & Agro Farms. Choose your state, LGA and delivery address."/>
+  <meta name="robots" content="noindex"/>
+  <link rel="icon" href="assets/logo/rec-logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="page-hero" aria-label="Checkout">
+      <div class="container">
+        <div class="inner">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span class="sep">/</span><a href="cart.html">Cart</a><span class="sep">/</span><span aria-current="page">Checkout</span>
+          </nav>
+          <h1>Checkout</h1>
+          <p>Almost there — deliver to your door or pick up at a station near you.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <form id="checkout_form" novalidate>
+          <div class="checkout-layout">
+            <div>
+              <!-- Customer info -->
+              <div class="checkout-panel">
+                <h3><span class="step-n">1</span> Your Information</h3>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="full_name">Full Name *</label>
+                    <input class="input" id="full_name" name="full_name" type="text" autocomplete="name" placeholder="e.g. Adaeze Okafor"/>
+                    <span class="err">Please enter your full name.</span>
+                  </div>
+                  <div class="field">
+                    <label for="phone">Phone Number *</label>
+                    <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 0803 123 4567"/>
+                    <span class="err">Please enter a valid phone number.</span>
+                  </div>
+                  <div class="field full">
+                    <label for="email">Email <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+                    <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"/>
+                    <span class="err">Please enter a valid email address.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fulfillment -->
+              <div class="checkout-panel">
+                <h3><span class="step-n">2</span> How would you like to receive your order?</h3>
+                <div class="fm-toggle" role="radiogroup" aria-label="Fulfillment method">
+                  <button type="button" class="fm-btn active" id="fm_btn_delivery" data-method="delivery" role="radio" aria-checked="true">
+                    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-truck"></use></svg>
+                    Delivery to me
+                  </button>
+                  <button type="button" class="fm-btn" id="fm_btn_pickup" data-method="pickup" role="radio" aria-checked="false">
+                    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-map-pin"></use></svg>
+                    Pickup at a station
+                  </button>
+                </div>
+
+                <!-- Delivery section -->
+                <div class="fm-section" id="fm_delivery">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="state">State *</label>
+                      <select class="select" id="state" name="state" autocomplete="address-level1">
+                        <option value="">Select your state</option>
+                      </select>
+                      <span class="err">Please select your state.</span>
+                    </div>
+                    <div class="field">
+                      <label for="lga">LGA *</label>
+                      <select class="select" id="lga" name="lga" autocomplete="address-level2" disabled>
+                        <option value="">Select your state first</option>
+                      </select>
+                      <span class="err">Please select your LGA.</span>
+                    </div>
+                    <div class="field full">
+                      <label for="delivery_address">Delivery Address *</label>
+                      <textarea class="textarea" id="delivery_address" name="delivery_address" rows="3" placeholder="House number, street, area, town, landmark" style="min-height:84px"></textarea>
+                      <span class="err">Please enter your delivery address.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pickup section -->
+                <div class="fm-section" id="fm_pickup" hidden>
+                  <div class="form-grid">
+                    <div class="field full">
+                      <label for="pickup_station">Pickup station *</label>
+                      <select class="select" id="pickup_station" name="pickup_station">
+                        <option value="">Loading stations…</option>
+                      </select>
+                      <span class="err">Please select a pickup station.</span>
+                    </div>
+                    <div class="field full">
+                      <div class="fm-pickup-info" id="pickup_info" hidden>
+                        <b>Station details</b>
+                        <span id="pickup_info_text"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="font-size:.82rem;color:var(--muted);margin-top:.8rem">Pickup is free — no delivery fee applies.</p>
+                </div>
+              </div>
+
+              <!-- Notes -->
+              <div class="checkout-panel">
+                <h3><span class="step-n">3</span> Additional Notes <span style="font-weight:400;font-size:.85rem;color:var(--muted)">(optional)</span></h3>
+                <div class="form-grid">
+                  <div class="field full">
+                    <label for="notes">Notes for the REC team</label>
+                    <textarea class="textarea" id="notes" name="notes" rows="2" placeholder="Any notes for the REC team" style="min-height:64px"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summary -->
+            <aside class="cart-summary">
+              <h3>Order Summary</h3>
+              <div class="order-summary-inline" id="checkout_items"></div>
+              <div class="sum-row"><span>Subtotal</span><span id="sum_subtotal">₦0</span></div>
+              <div class="sum-row"><span>Delivery fee</span><span id="sum_delivery">—</span></div>
+              <div class="sum-row total"><span>Total</span><b id="sum_total">₦0</b></div>
+              <p style="font-size:.78rem;color:var(--muted);margin-top:.6rem" id="sum_note">Delivery fee is confirmed based on your selected state. Pickup at one of our stations is free. We deliver across all 36 states and the FCT.</p>
+              <button type="submit" class="btn btn-gold btn-block" id="submit_btn" style="margin-top:1rem">
+                <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-check-circle"></use></svg>
+                Place Order
+              </button>
+              <a class="btn btn-outline btn-block" href="cart.html" style="margin-top:.7rem">Back to Cart</a>
+            </aside>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"></div>
+
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat with REC on WhatsApp">
+    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

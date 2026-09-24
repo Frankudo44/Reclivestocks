@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account | REC Livestock &amp; Agro Farms</title>
+  <meta name="robots" content="noindex"/>
+  <link rel="icon" href="assets/logo/rec-logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="inner">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span class="sep">/</span><span aria-current="page">My Account</span>
+          </nav>
+          <h1>My Account</h1>
+          <p>Sign in to manage your orders, or track an order using your order reference.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width:760px">
+        <div id="tab_row" style="display:flex;gap:.5rem;margin-bottom:1.6rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm btn-outline tab-btn active" data-tab="login">Sign In</button>
+          <button type="button" class="btn btn-sm btn-outline tab-btn" data-tab="register">Create Account</button>
+          <button type="button" class="btn btn-sm btn-outline tab-btn" data-tab="track">Track Order</button>
+        </div>
+
+        <!-- Profile -->
+        <div class="checkout-panel" id="view_profile" style="display:none">
+          <div id="profile_box"></div>
+        </div>
+
+        <!-- Login -->
+        <div class="checkout-panel" id="view_login" style="display:block">
+          <h3><span class="step-n">1</span> Welcome Back</h3>
+          <form id="login_form">
+            <div class="field">
+              <label for="login_email">Email</label>
+              <input class="input" type="email" id="login_email" required autocomplete="email"/>
+            </div>
+            <div class="field">
+              <label for="login_password">Password</label>
+              <div class="pw-field">
+                <input class="input" type="password" id="login_password" required autocomplete="current-password"/>
+                <button type="button" class="pw-toggle" data-target="login_password" aria-label="Show password" aria-pressed="false">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-eye"></use></svg>
+                </button>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-top:.6rem">
+              <button class="btn btn-primary btn-block" id="login_submit" type="submit">Sign In</button>
+            </div>
+          </form>
+          <p style="text-align:center;font-size:.88rem;margin-top:.8rem"><a class="btn-link" href="#" id="forgot_link">Forgot password?</a></p>
+        </div>
+
+        <!-- Forgot password -->
+        <div class="checkout-panel" id="view_forgot" style="display:none">
+          <h3><span class="step-n">1</span> Reset Your Password</h3>
+          <p style="font-size:.9rem;color:var(--muted)">Enter your account email and we'll send you a link to set a new password.</p>
+          <form id="forgot_form" novalidate>
+            <div class="field">
+              <label for="forgot_email">Email</label>
+              <input class="input" type="email" id="forgot_email" required autocomplete="email"/>
+            </div>
+            <button class="btn btn-primary btn-block" id="forgot_submit" type="submit">Send Reset Link</button>
+          </form>
+          <p style="text-align:center;font-size:.88rem;margin-top:.8rem"><a class="btn-link" href="#" id="forgot_back">Back to Sign In</a></p>
+        </div>
+
+        <!-- Set new password (landed from recovery email) -->
+        <div class="checkout-panel" id="view_recovery" style="display:none">
+          <h3><span class="step-n">1</span> Choose a New Password</h3>
+          <p style="font-size:.9rem;color:var(--muted)">Set a new password for your account, then sign in with it.</p>
+          <form id="recovery_form" novalidate>
+            <div class="field">
+              <label for="recovery_password">New Password <span style="font-weight:400;color:var(--muted)">(min 6 characters)</span></label>
+              <div class="pw-field">
+                <input class="input" type="password" id="recovery_password" minlength="6" required autocomplete="new-password"/>
+                <button type="button" class="pw-toggle" data-target="recovery_password" aria-label="Show password" aria-pressed="false">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-eye"></use></svg>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="recovery_confirm">Confirm Password</label>
+              <div class="pw-field">
+                <input class="input" type="password" id="recovery_confirm" minlength="6" required autocomplete="new-password"/>
+                <button type="button" class="pw-toggle" data-target="recovery_confirm" aria-label="Show password" aria-pressed="false">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-eye"></use></svg>
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block" id="recovery_submit" type="submit">Update Password</button>
+          </form>
+        </div>
+
+        <!-- Register -->
+        <div class="checkout-panel" id="view_register" style="display:none">
+          <h3><span class="step-n">2</span> Create Your Account</h3>
+          <form id="register_form">
+            <div class="field">
+              <label for="register_name">Full Name</label>
+              <input class="input" type="text" id="register_name" required autocomplete="name"/>
+            </div>
+            <div class="field">
+              <label for="register_phone">Phone</label>
+              <input class="input" type="tel" id="register_phone" required autocomplete="tel"/>
+            </div>
+            <div class="field">
+              <label for="register_email">Email</label>
+              <input class="input" type="email" id="register_email" required autocomplete="email"/>
+            </div>
+            <div class="field">
+              <label for="register_password">Password <span style="font-weight:400;color:var(--muted)">(min 6 characters)</span></label>
+              <div class="pw-field">
+                <input class="input" type="password" id="register_password" minlength="6" required autocomplete="new-password"/>
+                <button type="button" class="pw-toggle" data-target="register_password" aria-label="Show password" aria-pressed="false">
+                  <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-eye"></use></svg>
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block" id="register_submit" type="submit">Create Account</button>
+          </form>
+        </div>
+
+        <!-- Track -->
+        <div class="checkout-panel" id="view_track" style="display:none">
+          <h3><span class="step-n">3</span> Track Your Order</h3>
+          <form id="track_form">
+            <div class="field">
+              <label for="track_ref">Order Reference</label>
+              <input class="input" type="text" id="track_ref" placeholder="e.g. REC-2026-000001"/>
+            </div>
+            <button class="btn btn-primary" id="track_submit" type="submit">
+              <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-search"></use></svg>
+              Track Order
+            </button>
+          </form>
+          <div id="track_result" style="margin-top:1rem"></div>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem">
+          <p style="font-size:.9rem;color:var(--muted)">Want to order without an account? You can always check out as a guest.</p>
+          <a class="btn-link" href="shop.html">Browse the shop</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"></div>
+
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat with REC on WhatsApp">
+    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

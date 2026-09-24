@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Farm Supplies">
+  <rect width="400" height="300" rx="16" fill="#eaf3ec"/>
+  <g fill="none" stroke="#1f513c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M140 120h120v30H140z"/>
+    <path d="M160 150v50a20 20 0 0 0 20 20h40a20 20 0 0 0 20-20v-50"/>
+    <path d="M265 130l25-45M255 130l18-30M285 130l18-30"/>
+  </g>
+  <text x="200" y="262" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="16" font-weight="700" fill="#2b6b4f">Farm Supplies — add photo in admin</text>
+</svg>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Confirmed | REC Livestock &amp; Agro Farms</title>
+  <meta name="robots" content="noindex"/>
+  <link rel="icon" href="assets/logo/rec-logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="confirm-card" id="confirm_card">
+          <div class="check">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-check"></use></svg>
+          </div>
+          <span class="eyebrow" style="justify-content:center">Thank you</span>
+          <h1 style="font-size:1.8rem">Order Received</h1>
+          <p>Your order has been submitted to the REC team. Keep your order reference safe — we'll use it to track your order.</p>
+          <div class="ref-box" id="order_ref">—</div>
+          <div class="confirm-pickup" id="pickup_box" hidden>
+            <h2>Pickup details</h2>
+            <p><strong id="pickup_name"></strong></p>
+            <p id="pickup_address" style="margin-bottom:.3rem"></p>
+            <p style="font-size:.88rem;color:var(--muted)" id="pickup_hours"></p>
+          </div>
+          <p style="font-size:.9rem">We'll confirm your order shortly on <strong>WhatsApp</strong> or by <strong>phone</strong>.</p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:1.6rem">
+            <a class="btn btn-whatsapp" id="order_wa" href="#" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+              Send Order via WhatsApp
+            </a>
+            <a class="btn btn-primary" href="index.html">Back to Home</a>
+            <a class="btn btn-outline" href="shop.html">Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"></div>
+
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Chat with REC on WhatsApp">
+    <svg aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp"></use></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/order-success.js"></script>
+</body>
+</html>
