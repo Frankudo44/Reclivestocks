@@ -14,6 +14,7 @@
     { key: "products", label: "Products", icon: "i-box", href: "products.html" },
     { key: "categories", label: "Categories", icon: "i-layers", href: "categories.html" },
     { key: "inventory", label: "Inventory", icon: "i-database", href: "inventory.html" },
+    { key: "batches", label: "Batches", icon: "i-layers", href: "batches.html" },
     { key: "customers", label: "Customers", icon: "i-users", href: "customers.html" },
     { key: "delivery", label: "Delivery", icon: "i-truck", href: "delivery.html" },
     { key: "pickups", label: "Pickups", icon: "i-map-pin", href: "pickups.html" },

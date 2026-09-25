@@ -347,6 +347,11 @@
 
   /* ---------- Favorites ---------- */
   const FAV_KEY = "rec_favorites";
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  function isValidUuid(id) {
+    return UUID_RE.test(String(id));
+  }
+
   REC.favorites = {
     list() {
       try {
@@ -355,16 +360,76 @@
         return [];
       }
     },
+    _save(list) {
+      localStorage.setItem(FAV_KEY, JSON.stringify(list));
+    },
+    _client() {
+      REC.initSupabase();
+      return REC.supabaseClient;
+    },
+    _user() {
+      if (!REC.auth || typeof REC.auth.currentUser !== "function") return null;
+      const cur = REC.auth.currentUser();
+      return cur && cur.user && cur.user.id ? cur.user.id : null;
+    },
     toggle(productId) {
       let list = REC.favorites.list();
       const s = String(productId);
-      if (list.includes(s)) list = list.filter((x) => x !== s);
-      else list.push(s);
-      localStorage.setItem(FAV_KEY, JSON.stringify(list));
+      const on = !list.includes(s);
+      if (on) list.push(s);
+      else list = list.filter((x) => x !== s);
+      REC.favorites._save(list);
+      REC.favorites._syncOne(s, on);
       return list;
     },
     has(productId) {
       return REC.favorites.list().includes(String(productId));
+    },
+    async _syncOne(productId, on) {
+      const client = REC.favorites._client();
+      const uid = REC.favorites._user();
+      if (!client || !uid || !isValidUuid(productId)) return;
+      try {
+        if (on) {
+          await client.from("favorites").upsert({ user_id: uid, product_id: productId }, { onConflict: "user_id,product_id" });
+        } else {
+          await client.from("favorites").delete().match({ user_id: uid, product_id: productId });
+        }
+      } catch (e) {
+        if (win.console && console.warn) console.warn("favorites sync:", e.message);
+      }
+    },
+    async init() {
+      const client = REC.favorites._client();
+      const uid = REC.favorites._user();
+      if (!client || !uid) return;
+      try {
+        const { data, error } = await client.from("favorites").select("product_id");
+        if (error) return;
+        const dbIds = (data || []).map((r) => String(r.product_id));
+        const local = REC.favorites.list().map(String);
+        const merged = Array.from(new Set(local.concat(dbIds)));
+        REC.favorites._save(merged);
+        const toPush = merged.filter((id) => isValidUuid(id) && !dbIds.includes(id));
+        if (toPush.length) {
+          await client.from("favorites").upsert(
+            toPush.map((id) => ({ user_id: uid, product_id: id })),
+            { onConflict: "user_id,product_id" }
+          );
+        }
+        REC.favorites._applyToDom(merged);
+        win.dispatchEvent(new CustomEvent("rec:favchange", { detail: { ids: merged } }));
+      } catch (e) {
+        if (win.console && console.warn) console.warn("favorites init:", e.message);
+      }
+    },
+    _applyToDom(ids) {
+      const set = new Set(ids.map(String));
+      document.querySelectorAll("[data-fav]").forEach((btn) => {
+        const on = set.has(String(btn.getAttribute("data-fav")));
+        btn.classList.toggle("active", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
     },
   };
 
@@ -388,4 +453,8 @@
   };
 
   win.REC = REC;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (REC.isSupabaseConfigured && REC.isSupabaseConfigured() && REC.favorites) REC.favorites.init();
+  });
 })(window);

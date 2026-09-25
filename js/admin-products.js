@@ -141,6 +141,11 @@
         '<svg aria-hidden="true" style="width:16px;height:16px"><use href="../assets/icons/sprite.svg#i-upload"></use></svg> Upload Image' +
         '<input type="file" id="pf_file" accept="image/*" style="display:none"/></label>' +
         '<span class="hint" id="pf_upload_hint"></span></div>' +
+        '<div class="field full"><label>Gallery images</label>' +
+        '<div id="pf_gallery_list"></div>' +
+        '<button type="button" class="btn btn-sm btn-outline" id="pf_gallery_add" style="margin-top:.2rem">' +
+        '<svg aria-hidden="true" style="width:16px;height:16px"><use href="../assets/icons/sprite.svg#i-plus"></use></svg> Add another image</button>' +
+        '<span class="hint">Extra images shown in the product gallery. The image above is used as the cover.</span></div>' +
         "</div>" +
         '<div class="switch-row"><div><div class="sr-label">Active</div><div class="sr-hint">Visible in shop</div></div>' +
         '<label class="switch"><input type="checkbox" id="pf_active"' + (!p || p.active ? " checked" : "") + '><span class="slider"></span></label></div>' +
@@ -157,26 +162,73 @@
       modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", () => modal.classList.remove("open")));
       document.getElementById("pf_save").addEventListener("click", () => this.save());
 
-      document.getElementById("pf_file").addEventListener("change", async (ev) => {
+      const gallery = p && Array.isArray(p.gallery) ? p.gallery.filter((u) => u && u !== (p.image_url || "")) : [];
+      gallery.forEach((u) => this.appendGalleryRow(u));
+      const listEl = document.getElementById("pf_gallery_list");
+      if (!listEl.querySelector(".pf-g-row")) this.appendGalleryRow("");
+      document.getElementById("pf_gallery_add").addEventListener("click", () => this.appendGalleryRow(""));
+      listEl.addEventListener("click", (ev) => {
+        const del = ev.target.closest(".pf-g-del");
+        if (del) del.closest(".pf-g-row").remove();
+      });
+      listEl.addEventListener("change", (ev) => {
+        const file = ev.target.closest(".pf-g-file");
+        if (!file || !file.files[0]) return;
+        this.uploadTo(file, file.closest(".pf-g-row").querySelector(".pf-g-img"));
+      });
+
+      document.getElementById("pf_file").addEventListener("change", (ev) => {
         const file = ev.target.files[0];
         if (!file) return;
-        const hint = document.getElementById("pf_upload_hint");
-        hint.textContent = "Uploading…";
-        try {
-          const path = "products/" + Date.now() + "-" + file.name.replace(/\s+/g, "-");
-          const { error } = await sb().storage.from(REC.config.storageBucket).upload(path, file, {
-            cacheControl: "3600",
-            upsert: false,
-            contentType: file.type,
-          });
-          if (error) throw error;
-          const { data } = sb().storage.from(REC.config.storageBucket).getPublicUrl(path);
-          document.getElementById("pf_image").value = data.publicUrl;
-          hint.textContent = "Uploaded ✓";
-        } catch (e) {
-          hint.textContent = "Upload failed: " + e.message;
-        }
+        this.uploadTo(ev.target, document.getElementById("pf_image"), document.getElementById("pf_upload_hint"));
       });
+    },
+
+    appendGalleryRow(url) {
+      const list = document.getElementById("pf_gallery_list");
+      if (!list) return;
+      const row = document.createElement("div");
+      row.className = "pf-g-row";
+      row.style.cssText = "display:flex;gap:.4rem;margin-bottom:.4rem;align-items:center";
+      row.innerHTML =
+        '<input class="input pf-g-img" value="' +
+        ADMIN.esc(url || "") +
+        '" placeholder="https://... image URL or upload"/>' +
+        '<label class="btn btn-sm btn-outline" style="margin:0;cursor:pointer;white-space:nowrap;flex:0 0 auto">Upload' +
+        '<input type="file" class="pf-g-file" accept="image/*" style="display:none"/></label>' +
+        '<button type="button" class="t-btn danger pf-g-del" title="Remove image"><svg><use href="../assets/icons/sprite.svg#i-trash"></use></svg></button>';
+      list.appendChild(row);
+    },
+
+    async uploadTo(fileInput, urlInput, hint) {
+      const file = fileInput.files[0];
+      if (!file) return;
+      const original = urlInput.value;
+      if (hint) hint.textContent = "Uploading…";
+      else urlInput.value = "Uploading…";
+      try {
+        const path = "products/" + Date.now() + "-" + file.name.replace(/\s+/g, "-");
+        const { error } = await sb().storage.from(REC.config.storageBucket).upload(path, file, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: file.type,
+        });
+        if (error) throw error;
+        const { data } = sb().storage.from(REC.config.storageBucket).getPublicUrl(path);
+        urlInput.value = data.publicUrl;
+        if (hint) hint.textContent = "Uploaded ✓";
+      } catch (e) {
+        if (hint) hint.textContent = "Upload failed: " + e.message;
+        else ADMIN.toast("Upload failed: " + e.message, "error");
+      }
+    },
+
+    galleryUrls() {
+      const list = document.getElementById("pf_gallery_list");
+      if (!list) return [];
+      return Array.from(list.querySelectorAll(".pf-g-img"))
+        .map((i) => i.value.trim())
+        .filter(Boolean);
     },
 
     async save() {
@@ -188,6 +240,9 @@
       const btn = get("pf_save");
       btn.disabled = true;
       btn.textContent = "Saving…";
+
+      const gallery = [get("pf_image").value.trim(), ...this.galleryUrls()].filter(Boolean);
+      const finalGallery = Array.from(new Set(gallery));
 
       const payload = {
         name,
@@ -202,7 +257,8 @@
         sex: get("pf_sex").value.trim() || null,
         weight: get("pf_weight").value.trim() || null,
         delivery_info: get("pf_delivery").value.trim() || null,
-        image_url: get("pf_image").value.trim() || null,
+        image_url: finalGallery[0] || null,
+        gallery: finalGallery.length ? finalGallery : null,
         active: get("pf_active").checked,
         featured: get("pf_featured").checked,
         online_orderable: get("pf_online").checked,
