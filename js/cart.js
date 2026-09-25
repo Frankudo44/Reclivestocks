@@ -18,7 +18,9 @@
 
     save(list) {
       localStorage.setItem(KEY, JSON.stringify(list));
-      win.dispatchEvent(new CustomEvent("rec:cartchange", { detail: { items: list } }));
+      const ev = new CustomEvent("rec:cartchange", { bubbles: true, detail: { items: list } });
+      document.dispatchEvent(ev);
+      win.dispatchEvent(ev);
     },
 
     count() {
